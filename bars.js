@@ -14,6 +14,8 @@ var margin = {
 	left: 10
 }
 
+globdatobj = data
+
 width = width- margin.left - margin.right,
 height = height - margin.top - margin.bottom,
 
@@ -28,6 +30,7 @@ var x = d3.scaleBand()
 
 var y = d3.scaleLinear()
 	.rangeRound([height, 0]);
+	
 
 
 x.domain(data.map(function (d) {
@@ -36,6 +39,11 @@ x.domain(data.map(function (d) {
 y.domain([0, d3.max(data, function (d) {
 			return Number(d.Speed);
 		})]);
+		
+var line = d3.line()
+                .x(function(d) { return x(d.Run);})
+                .y(function(d) { return y(d.Speed); })
+
 
 g.append("g")
   .attr("transform", "translate(0," + height + ")")
@@ -56,8 +64,8 @@ g.selectAll(".bar")
   .enter().append("rect")
   .attr("class", "bar")
   .attr("x", function (d) {
-	return x(d.Run);
-})
+	  return x(d.Run);
+  })
   .attr("y", function (d) {
 	  return y(Number(d.Speed));
   })
@@ -78,3 +86,10 @@ g.selectAll(".bar")
         return "steelblue";
     });
   });
+  
+g.append("path")
+  .datum(data)
+  .attr("class","line")
+  .attr("d", line)
+  .attr("fill", "none")
+  .attr("stroke", "red")

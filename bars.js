@@ -1,4 +1,4 @@
-// !preview r2d3 data=data.frame(Expt = rep(1,20), Run=(seq(1,20)), Speed =c(850,740,900,1070,930,850,950,980,980,880,1000,980,930,650,760,810,1000,1000,960,960))
+// !preview r2d3 data=data.frame(Expt = rep(1,20), Run=(seq(1,20)), Speed =c(850,740,900,1070,930,850,950,980,980,880,1000,980,930,650,760,810,1000,1000,960,960)), options = list(x = 'Run', y = 'Speed')
 //
 // r2d3: https://rstudio.github.io/r2d3
 //
@@ -91,9 +91,9 @@ g.selectAll(".bar")
     });
   });
   
-g.append("path")
-  .datum(data)
-  .attr("class","line")
-  .attr("d", line)
-  .attr("fill", "none")
-  .attr("stroke", "red")
+//g.append("path")
+//  .datum(data)
+//  .attr("class","line")
+//  .attr("d", line)
+//  .attr("fill", "none")
+//  .attr("stroke", "red")

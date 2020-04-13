@@ -43,10 +43,12 @@ y.domain([0, d3.max(data, function (d) {
 			return Number(d[options.y]);
 		})]);
 		
-var line = d3.line()
-                .x(function(d) { return x(d[options.x]);})
-                .y(function(d) { return y(d[options.y]); })
+//var line = d3.line()
+//                .x(function(d) { return x(d[options.x]);})
+//                .y(function(d) { return y(d[options.y]); })
 
+var bars = g.selectAll(".bar")
+  .data(data)
 
 g.append("g")
   .attr("transform", "translate(0," + height + ")")
@@ -62,9 +64,7 @@ g.append("g")
   .attr("text-anchor", "end")
   .text(options.y);
 
-g.selectAll(".bar")
-  .data(data)
-  .enter()
+bars.enter()
   .append("rect")
   .attr("class", "bar")
   .attr("x", function (d) {
@@ -90,6 +90,14 @@ g.selectAll(".bar")
         return "steelblue";
     });
   });
+  
+bars.exit().remove();
+  
+bars.transition()
+  .duration(100)
+  .attr("height", function (d) {
+	  return height - y(Number(d[options.y]));
+  })
   
 //g.append("path")
 //  .datum(data)

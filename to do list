@@ -1,0 +1,9 @@
+Things to do
+Finish 2 bars script
+make all the colours options
+make transition work in app
+see if I can get filtering across charts to work
+
+
+Issues
+bars.js doesn't work with negative numbers

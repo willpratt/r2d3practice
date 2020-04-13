@@ -7,3 +7,4 @@ bars_data <- data.frame(Expt = rep(1,20), Run=(seq(1,20)), Speed =c(850,740,900,
 r2d3(bars_data, "bars.js", options = list(x = 'Run', y = 'Speed'))
 
 r2d3(test_data, "bars.js", options = list(x = 'colour', y = 'number'))
+

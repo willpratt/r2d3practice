@@ -60,7 +60,7 @@ g.append("g")
   .attr("y", 6)
   .attr("dy", "0.71em")
   .attr("text-anchor", "end")
-  .text("Speed");
+  .text(options.y);
 
 g.selectAll(".bar")
   .data(data)

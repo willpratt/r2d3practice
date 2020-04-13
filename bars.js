@@ -6,12 +6,12 @@
 // It took me a while to understand what r2d3 was doing for me, and therefore how to port
 // 'standard' d3 code into an r2d3 world, hopefully this might help others in the same boat.
 
-// This is necessary in this setting since r2d3 by default won't pad the sides of the view so the axis won't be visible accounting for the translation below 
+// This is necessary in this setting since r2d3 by default won't pad the sides of the view so the axis won't be visible accounting for the translation below.
 var margin = {
 	top: 20,
 	right: 30,
-	bottom: 20,
-	left: 10
+	bottom: 10,
+	left: 20
 }
 
 globdatobj = data
@@ -24,6 +24,9 @@ g = svg.append("g")
 
 var parseTime = d3.timeParse("%d-%b-%y");
 
+dummyFunc = function() {return "Hello Will"}
+
+
 var x = d3.scaleBand()
 	.rangeRound([0, width])
 	.padding(0.1);
@@ -34,15 +37,15 @@ var y = d3.scaleLinear()
 
 
 x.domain(data.map(function (d) {
-		return d.Run;
+		return d[options.x];
 	}));
 y.domain([0, d3.max(data, function (d) {
-			return Number(d.Speed);
+			return Number(d[options.y]);
 		})]);
 		
 var line = d3.line()
-                .x(function(d) { return x(d.Run);})
-                .y(function(d) { return y(d.Speed); })
+                .x(function(d) { return x(d[options.x]);})
+                .y(function(d) { return y(d[options.y]); })
 
 
 g.append("g")
@@ -61,17 +64,18 @@ g.append("g")
 
 g.selectAll(".bar")
   .data(data)
-  .enter().append("rect")
+  .enter()
+  .append("rect")
   .attr("class", "bar")
   .attr("x", function (d) {
-	  return x(d.Run);
+	  return x(d[options.x]);
   })
   .attr("y", function (d) {
-	  return y(Number(d.Speed));
+	  return y(Number(d[options.y]));
   })
   .attr("width", x.bandwidth())
   .attr("height", function (d) {
-	  return height - y(Number(d.Speed));
+	  return height - y(Number(d[options.y]));
   })
   .attr('fill', 'steelblue')
   .on("mouseover", function() {

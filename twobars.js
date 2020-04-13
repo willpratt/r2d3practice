@@ -2,6 +2,8 @@
 //
 // r2d3: https://rstudio.github.io/r2d3
 //
+
+// Taken from https://bl.ocks.org/seasmith/10bd767bd8785929e116bae18e7356eb
 margin = {top: 30, right: 10, bottom: 60, left: 10},
 width = (width/ 2.25) - margin.left - margin.right,
 height = (height / 1) - margin.top - margin.bottom;
@@ -93,9 +95,11 @@ var x2 = d3.scaleLinear()
 var y2 = d3.scaleBand()
           .rangeRound([0, height2])
           .padding(0.1);
+          
+var translation = "translate(" + width/2 +", 30)";
 
 var gContainer2 = svg.append("g")
-          .attr("transform", "translate(560, 30)")
+          .attr("transform", translation)
           .classed("yearly-container", true);
 
 var g2 = gContainer2.append("g")
